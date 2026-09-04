@@ -91,6 +91,17 @@
         <button onclick="triggerVoiceOrb()" class="bg-white text-blue-900 text-xs font-bold px-3 py-1.5 rounded-xl shadow active:scale-95 transition">Talk</button>
       </div>
 
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 flex items-center justify-center text-base"><i class="fa-solid fa-robot"></i></div>
+          <div>
+            <h3 class="text-xs font-extrabold text-slate-900">Your AI Agents</h3>
+            <p class="text-[11px] text-slate-500 font-medium" id="dash-agent-summary">No custom agents yet</p>
+          </div>
+        </div>
+        <button onclick="openAgentWizard()" id="dash-agent-cta" class="bg-blue-600 text-white text-[11px] font-bold px-3 py-1.5 rounded-xl shadow active:scale-95 transition whitespace-nowrap">Create</button>
+      </div>
+
       <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm">
         <div class="flex justify-between items-center mb-2">
           <div><h3 class="text-xs font-extrabold text-slate-900">Revenue • 30D Window</h3><p class="text-[10px] text-slate-400">Total: $54,273 gross</p></div>
@@ -146,6 +157,42 @@
       <div id="clients-list" class="space-y-3"></div>
     </section>
 
+    <section id="view-agents" class="hidden space-y-3">
+      <div class="flex justify-between items-center">
+        <div><h2 class="text-base font-extrabold text-slate-900">AI Agents</h2><p class="text-[11px] text-slate-400">Nova plus the agents you build</p></div>
+        <button onclick="openAgentWizard()" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs shadow-md"><i class="fa-solid fa-plus"></i></button>
+      </div>
+
+      <div class="bg-gradient-to-r from-blue-900 to-blue-700 text-white rounded-2xl p-4 shadow-lg shadow-blue-900/20">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center orb-glow"><i class="fa-solid fa-microphone text-white"></i></div>
+            <div>
+              <h3 class="text-xs font-bold leading-tight flex items-center gap-1.5">Nova <span class="text-[9px] font-bold uppercase tracking-wider bg-white/15 px-1.5 py-0.5 rounded">Built-in</span></h3>
+              <p class="text-[11px] text-blue-100/90 font-medium">Voice assistant for contacts, deals & bookings</p>
+            </div>
+          </div>
+          <span class="text-[9px] font-bold uppercase tracking-wider bg-emerald-400/20 text-emerald-200 border border-emerald-300/30 px-2 py-0.5 rounded-full flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Active</span>
+        </div>
+      </div>
+
+      <div id="agents-empty" class="bg-white rounded-2xl p-5 border-2 border-dashed border-blue-200 text-center space-y-3">
+        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 border border-blue-100 flex items-center justify-center mx-auto text-xl"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+        <div>
+          <h3 class="text-sm font-extrabold text-slate-900">Create your first agent</h3>
+          <p class="text-[11px] text-slate-500 mt-1 leading-snug">Give it a goal, pick its channels, and it starts working your leads while you sleep.</p>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-left">
+          <div class="bg-slate-50 rounded-xl p-2 border border-slate-100"><span class="text-[9px] font-black text-blue-600">1</span><p class="text-[10px] font-bold text-slate-700 leading-tight">Pick a template</p></div>
+          <div class="bg-slate-50 rounded-xl p-2 border border-slate-100"><span class="text-[9px] font-black text-blue-600">2</span><p class="text-[10px] font-bold text-slate-700 leading-tight">Set goal & channels</p></div>
+          <div class="bg-slate-50 rounded-xl p-2 border border-slate-100"><span class="text-[9px] font-black text-blue-600">3</span><p class="text-[10px] font-bold text-slate-700 leading-tight">Review & activate</p></div>
+        </div>
+        <button onclick="openAgentWizard()" class="w-full bg-blue-600 text-white text-xs font-bold py-2.5 rounded-xl shadow active:scale-95 transition"><i class="fa-solid fa-plus mr-1"></i> Build an agent</button>
+      </div>
+
+      <div id="agents-list" class="space-y-3"></div>
+    </section>
+
     <section id="view-pipeline" class="hidden space-y-3">
       <div class="flex justify-between items-center">
         <div><h2 class="text-base font-extrabold text-slate-900">Deals Pipeline</h2><p class="text-[11px] text-slate-400">Total Value: $1,825,000</p></div>
@@ -188,6 +235,7 @@
   <nav class="h-16 bg-white/95 backdrop-blur-md border-t border-slate-200 fixed bottom-0 left-0 right-0 z-30 flex items-center justify-around px-2 pb-safe">
     <button onclick="switchMobileTab('dashboard')" id="btn-nav-dashboard" class="flex flex-col items-center gap-1 text-blue-600"><i class="fa-solid fa-gauge-high text-base"></i><span class="text-[10px] font-bold">Live Ops</span></button>
     <button onclick="switchMobileTab('clients')" id="btn-nav-clients" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-address-book text-base"></i><span class="text-[10px] font-bold">Clients</span></button>
+    <button onclick="switchMobileTab('agents')" id="btn-nav-agents" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-robot text-base"></i><span class="text-[10px] font-bold">Agents</span></button>
     <button onclick="triggerVoiceOrb()" class="w-12 h-12 -mt-5 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg shadow-blue-500/40 orb-glow active:scale-90 transition"><i class="fa-solid fa-microphone text-lg"></i></button>
     <button onclick="switchMobileTab('pipeline')" id="btn-nav-pipeline" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-diagram-project text-base"></i><span class="text-[10px] font-bold">Pipeline</span></button>
     <button onclick="switchMobileTab('calendar')" id="btn-nav-calendar" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600"><i class="fa-regular fa-calendar-check text-base"></i><span class="text-[10px] font-bold">Calendar</span></button>
@@ -213,9 +261,90 @@
     </div>
   </div>
 
+  <div id="agent-sheet" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex flex-col justify-end hidden">
+    <div class="bg-white rounded-t-3xl shadow-2xl border-t border-slate-200 max-h-[92vh] flex flex-col">
+      <div class="px-6 pt-4 pb-3 border-b border-slate-100 shrink-0">
+        <div class="w-12 h-1.5 bg-slate-200 rounded-full mx-auto mb-3" onclick="closeAgentWizard()"></div>
+        <div class="flex items-center justify-between">
+          <div>
+            <h3 class="text-base font-extrabold text-slate-900" id="agent-sheet-title">Create your first agent</h3>
+            <p class="text-[11px] text-slate-400" id="agent-sheet-subtitle">Step 1 of 3 • Pick a starting point</p>
+          </div>
+          <button onclick="closeAgentWizard()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center text-xs"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        <div class="flex gap-1.5 mt-3">
+          <div id="agent-step-dot-1" class="h-1.5 flex-1 rounded-full bg-blue-600"></div>
+          <div id="agent-step-dot-2" class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+          <div id="agent-step-dot-3" class="h-1.5 flex-1 rounded-full bg-slate-200"></div>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 overflow-y-auto space-y-3 flex-1">
+        <div id="agent-step-1" class="space-y-2">
+          <p class="text-[11px] text-slate-500 font-medium">Templates come pre-filled. You can change everything in the next step.</p>
+          <div class="grid grid-cols-2 gap-2" id="agent-template-grid"></div>
+        </div>
+
+        <div id="agent-step-2" class="hidden space-y-3">
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Agent name</label>
+            <input type="text" id="agent-name" placeholder="e.g. Lead Responder" maxlength="32" class="mt-1 w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Goal & instructions</label>
+            <textarea id="agent-goal" rows="3" placeholder="What should this agent do, and how should it sound?" class="mt-1 w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"></textarea>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Channels</label>
+            <div class="flex flex-wrap gap-1.5 mt-1" id="agent-channel-chips"></div>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Runs when</label>
+            <select id="agent-trigger" class="mt-1 w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+              <option value="New lead captured">New lead captured</option>
+              <option value="Missed call">Missed call</option>
+              <option value="Deal changes stage">Deal changes stage</option>
+              <option value="Booking confirmed">Booking confirmed</option>
+              <option value="Purchase completed">Purchase completed</option>
+              <option value="Every morning at 9:00 AM">Every morning at 9:00 AM</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Autonomy</label>
+            <div class="grid grid-cols-2 gap-2 mt-1">
+              <button type="button" onclick="setAgentAutonomy('approve')" id="agent-autonomy-approve" class="text-left p-2.5 rounded-xl border-2 border-blue-600 bg-blue-50"><span class="text-[11px] font-bold text-slate-900 block">Draft for approval</span><span class="text-[10px] text-slate-500 leading-tight block">You review before anything is sent</span></button>
+              <button type="button" onclick="setAgentAutonomy('auto')" id="agent-autonomy-auto" class="text-left p-2.5 rounded-xl border-2 border-slate-200 bg-white"><span class="text-[11px] font-bold text-slate-900 block">Fully automatic</span><span class="text-[10px] text-slate-500 leading-tight block">Sends on its own, logs everything</span></button>
+            </div>
+          </div>
+        </div>
+
+        <div id="agent-step-3" class="hidden space-y-3">
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2" id="agent-review-card"></div>
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Sample message</span>
+            <div class="mt-1 bg-white rounded-2xl rounded-tl-sm p-3 border border-blue-100 shadow-sm">
+              <p class="text-[9px] font-bold text-blue-600 uppercase tracking-wide mb-1" id="agent-sample-meta"></p>
+              <p class="text-xs text-slate-800 leading-snug" id="agent-sample-text"></p>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-snug">You can pause or edit the agent any time from the Agents tab.</p>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 border-t border-slate-100 grid grid-cols-2 gap-2 shrink-0" style="padding-bottom: calc(env(safe-area-inset-bottom, 12px) + 12px)">
+        <button onclick="agentWizardBack()" id="agent-back-btn" class="bg-slate-100 text-slate-600 text-xs font-bold py-2.5 rounded-xl active:scale-95 transition">Cancel</button>
+        <button onclick="agentWizardNext()" id="agent-next-btn" class="bg-blue-600 text-white text-xs font-bold py-2.5 rounded-xl shadow active:scale-95 transition disabled:opacity-40" disabled>Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="fixed left-4 right-4 bottom-24 z-[60] hidden">
+    <div class="bg-slate-900 text-white text-xs font-semibold px-4 py-3 rounded-2xl shadow-xl flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-400"></i><span id="toast-text"></span></div>
+  </div>
+
   <script>
     function switchMobileTab(viewId) {
-      ['dashboard', 'clients', 'pipeline', 'calendar'].forEach(v => {
+      ['dashboard', 'clients', 'agents', 'pipeline', 'calendar'].forEach(v => {
         const el = document.getElementById(`view-${v}`);
         const btn = document.getElementById(`btn-nav-${v}`);
         if (el) el.classList.add('hidden');
@@ -292,8 +421,261 @@
       alert("New client record added!");
     }
 
+    // ---------- AI Agents ----------
+    const AGENT_TEMPLATES = [
+      { key: 'followup', name: 'Lead Responder', icon: 'fa-bolt', tagline: 'Replies to new leads in under 2 minutes and books a call.', goal: 'Reply to every new lead within 2 minutes, answer basic questions about our offer, and book a 15-minute discovery call. Sound warm, concise and professional.', channels: ['SMS', 'Instagram DM'], trigger: 'New lead captured' },
+      { key: 'setter', name: 'Appointment Setter', icon: 'fa-calendar-check', tagline: 'Confirms bookings and chases no-shows.', goal: 'Confirm upcoming appointments 24 hours ahead, send a reminder 1 hour before, and offer to reschedule anyone who misses.', channels: ['SMS', 'Email'], trigger: 'Booking confirmed' },
+      { key: 'reviews', name: 'Review Collector', icon: 'fa-star', tagline: 'Asks happy clients for reviews after a purchase.', goal: 'Three days after a purchase, thank the client and ask for a Google review. Only ask once and never pressure them.', channels: ['Email'], trigger: 'Purchase completed' },
+      { key: 'custom', name: '', icon: 'fa-pen-ruler', tagline: 'Start from scratch with your own goal.', goal: '', channels: [], trigger: 'New lead captured' }
+    ];
+    const AGENT_CHANNELS = [
+      { name: 'SMS', icon: 'fa-comment-sms' },
+      { name: 'Email', icon: 'fa-envelope' },
+      { name: 'Instagram DM', icon: 'fa-brands fa-instagram' },
+      { name: 'Voice Call', icon: 'fa-phone' }
+    ];
+    const AGENT_STORAGE_KEY = 'omni-custom-agents';
+
+    let customAgents = [];
+    try { customAgents = JSON.parse(localStorage.getItem(AGENT_STORAGE_KEY) || '[]'); } catch (e) { customAgents = []; }
+
+    let agentStep = 1;
+    let agentDraft = null;
+
+    function saveAgents() {
+      try { localStorage.setItem(AGENT_STORAGE_KEY, JSON.stringify(customAgents)); } catch (e) {}
+    }
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').textContent = text;
+      toast.classList.remove('hidden');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.add('hidden'), 2600);
+    }
+
+    function openAgentWizard() {
+      switchMobileTab('agents');
+      agentStep = 1;
+      agentDraft = null;
+      document.getElementById('agent-sheet-title').textContent = customAgents.length ? 'Create an agent' : 'Create your first agent';
+      renderAgentTemplates();
+      renderAgentStep();
+      document.getElementById('agent-sheet').classList.remove('hidden');
+    }
+
+    function closeAgentWizard() {
+      document.getElementById('agent-sheet').classList.add('hidden');
+    }
+
+    function renderAgentTemplates() {
+      const grid = document.getElementById('agent-template-grid');
+      grid.innerHTML = '';
+      AGENT_TEMPLATES.forEach(t => {
+        const selected = agentDraft && agentDraft.template === t.key;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `text-left p-3 rounded-2xl border-2 transition ${selected ? 'border-blue-600 bg-blue-50' : 'border-slate-200 bg-white'}`;
+        btn.innerHTML = `
+          <div class="w-8 h-8 rounded-xl ${selected ? 'bg-blue-600 text-white' : 'bg-blue-50 text-blue-600'} flex items-center justify-center text-sm mb-2"><i class="fa-solid ${t.icon}"></i></div>
+          <span class="text-[11px] font-bold text-slate-900 block leading-tight">${t.name || 'Start from scratch'}</span>
+          <span class="text-[10px] text-slate-500 block leading-snug mt-0.5">${t.tagline}</span>`;
+        btn.onclick = () => selectAgentTemplate(t.key);
+        grid.appendChild(btn);
+      });
+    }
+
+    function selectAgentTemplate(key) {
+      const t = AGENT_TEMPLATES.find(x => x.key === key);
+      agentDraft = { template: t.key, icon: t.icon, name: t.name, goal: t.goal, channels: [...t.channels], trigger: t.trigger, autonomy: 'approve' };
+      renderAgentTemplates();
+      document.getElementById('agent-next-btn').disabled = false;
+    }
+
+    function renderAgentChannels() {
+      const wrap = document.getElementById('agent-channel-chips');
+      wrap.innerHTML = '';
+      AGENT_CHANNELS.forEach(ch => {
+        const on = agentDraft.channels.includes(ch.name);
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = `flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[11px] font-bold border transition ${on ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-slate-600 border-slate-200'}`;
+        chip.innerHTML = `<i class="${ch.icon.startsWith('fa-brands') ? ch.icon : 'fa-solid ' + ch.icon}"></i>${ch.name}`;
+        chip.onclick = () => {
+          if (on) agentDraft.channels = agentDraft.channels.filter(c => c !== ch.name);
+          else agentDraft.channels.push(ch.name);
+          renderAgentChannels();
+          validateAgentStep2();
+        };
+        wrap.appendChild(chip);
+      });
+    }
+
+    function setAgentAutonomy(mode) {
+      agentDraft.autonomy = mode;
+      const a = document.getElementById('agent-autonomy-approve');
+      const b = document.getElementById('agent-autonomy-auto');
+      a.className = `text-left p-2.5 rounded-xl border-2 ${mode === 'approve' ? 'border-blue-600 bg-blue-50' : 'border-slate-200 bg-white'}`;
+      b.className = `text-left p-2.5 rounded-xl border-2 ${mode === 'auto' ? 'border-blue-600 bg-blue-50' : 'border-slate-200 bg-white'}`;
+    }
+
+    function readAgentForm() {
+      agentDraft.name = document.getElementById('agent-name').value.trim();
+      agentDraft.goal = document.getElementById('agent-goal').value.trim();
+      agentDraft.trigger = document.getElementById('agent-trigger').value;
+    }
+
+    function validateAgentStep2() {
+      readAgentForm();
+      const ok = agentDraft.name.length > 0 && agentDraft.goal.length > 0 && agentDraft.channels.length > 0;
+      document.getElementById('agent-next-btn').disabled = !ok;
+    }
+
+    function agentSampleMessage(a) {
+      const first = 'Marcus';
+      switch (a.template) {
+        case 'followup': return `Hi ${first}, this is ${a.name} from OmniOS. Thanks for reaching out! I can get you booked for a quick 15-minute call this week. Does Tuesday at 2:00 PM work?`;
+        case 'setter': return `Hi ${first}, ${a.name} here from OmniOS. Just confirming your Commercial Onboarding call tomorrow at 2:00 PM. Reply YES to confirm or RESCHEDULE to pick a new time.`;
+        case 'reviews': return `Hi ${first}, thank you for your recent purchase! If you have 60 seconds, a quick Google review would mean a lot to our team. Here is the link: omnios.link/review`;
+        default: {
+          const goal = a.goal.split(/[.!?]/)[0].trim();
+          return `Hi ${first}, this is ${a.name} from OmniOS. ${goal ? goal.charAt(0).toUpperCase() + goal.slice(1) + '.' : ''} Let me know if there is anything I can help with today.`;
+        }
+      }
+    }
+
+    function renderAgentReview() {
+      const a = agentDraft;
+      document.getElementById('agent-review-card').innerHTML = `
+        <div class="flex items-center gap-3 pb-2 border-b border-slate-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-base"><i class="fa-solid ${a.icon}"></i></div>
+          <div><h4 class="text-sm font-extrabold text-slate-900">${escapeHtml(a.name)}</h4><p class="text-[10px] text-slate-500">${a.autonomy === 'auto' ? 'Fully automatic' : 'Drafts for your approval'}</p></div>
+        </div>
+        <p class="text-[11px] text-slate-700 leading-snug">${escapeHtml(a.goal)}</p>
+        <div class="flex flex-wrap gap-1.5 pt-1">
+          <span class="text-[9px] font-bold uppercase tracking-wide bg-white border border-slate-200 text-slate-600 px-2 py-0.5 rounded"><i class="fa-solid fa-bolt text-blue-600 mr-1"></i>${a.trigger}</span>
+          ${a.channels.map(c => `<span class="text-[9px] font-bold uppercase tracking-wide bg-blue-50 border border-blue-100 text-blue-700 px-2 py-0.5 rounded">${c}</span>`).join('')}
+        </div>`;
+      document.getElementById('agent-sample-meta').textContent = `${a.name} • via ${a.channels[0]}`;
+      document.getElementById('agent-sample-text').textContent = agentSampleMessage(a);
+    }
+
+    function renderAgentStep() {
+      [1, 2, 3].forEach(n => {
+        document.getElementById(`agent-step-${n}`).classList.toggle('hidden', n !== agentStep);
+        document.getElementById(`agent-step-dot-${n}`).className = `h-1.5 flex-1 rounded-full ${n <= agentStep ? 'bg-blue-600' : 'bg-slate-200'}`;
+      });
+      const subtitles = { 1: 'Step 1 of 3 • Pick a starting point', 2: 'Step 2 of 3 • Set goal & channels', 3: 'Step 3 of 3 • Review & activate' };
+      document.getElementById('agent-sheet-subtitle').textContent = subtitles[agentStep];
+      const back = document.getElementById('agent-back-btn');
+      const next = document.getElementById('agent-next-btn');
+      back.textContent = agentStep === 1 ? 'Cancel' : 'Back';
+      if (agentStep === 1) {
+        next.textContent = 'Next';
+        next.disabled = !agentDraft;
+      } else if (agentStep === 2) {
+        next.textContent = 'Review';
+        document.getElementById('agent-name').value = agentDraft.name;
+        document.getElementById('agent-goal').value = agentDraft.goal;
+        document.getElementById('agent-trigger').value = agentDraft.trigger;
+        renderAgentChannels();
+        setAgentAutonomy(agentDraft.autonomy);
+        validateAgentStep2();
+      } else {
+        next.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Activate agent';
+        next.disabled = false;
+        renderAgentReview();
+      }
+    }
+
+    function agentWizardBack() {
+      if (agentStep === 1) { closeAgentWizard(); return; }
+      if (agentStep === 2) readAgentForm();
+      agentStep -= 1;
+      renderAgentStep();
+    }
+
+    function agentWizardNext() {
+      if (agentStep === 1) { agentStep = 2; renderAgentStep(); return; }
+      if (agentStep === 2) { readAgentForm(); agentStep = 3; renderAgentStep(); return; }
+      activateAgent();
+    }
+
+    function activateAgent() {
+      const agent = { ...agentDraft, id: Date.now(), status: 'active', runs: 0, createdAt: new Date().toISOString() };
+      customAgents.unshift(agent);
+      saveAgents();
+      closeAgentWizard();
+      renderAgents();
+      showToast(`${agent.name} is live and ${agent.autonomy === 'auto' ? 'sending automatically' : 'drafting for your approval'}.`);
+    }
+
+    function toggleAgentStatus(id) {
+      const a = customAgents.find(x => x.id === id);
+      if (!a) return;
+      a.status = a.status === 'active' ? 'paused' : 'active';
+      saveAgents();
+      renderAgents();
+      showToast(`${a.name} ${a.status === 'active' ? 'resumed' : 'paused'}.`);
+    }
+
+    function deleteAgent(id) {
+      const a = customAgents.find(x => x.id === id);
+      if (!a || !confirm(`Delete ${a.name}? This cannot be undone.`)) return;
+      customAgents = customAgents.filter(x => x.id !== id);
+      saveAgents();
+      renderAgents();
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+
+    function renderAgents() {
+      const list = document.getElementById('agents-list');
+      const empty = document.getElementById('agents-empty');
+      const summary = document.getElementById('dash-agent-summary');
+      const cta = document.getElementById('dash-agent-cta');
+      if (!list) return;
+      list.innerHTML = '';
+      empty.classList.toggle('hidden', customAgents.length > 0);
+      const active = customAgents.filter(a => a.status === 'active').length;
+      summary.textContent = customAgents.length ? `${active} active • ${customAgents.length} custom + Nova` : 'No custom agents yet';
+      cta.textContent = customAgents.length ? 'Manage' : 'Create';
+      cta.onclick = customAgents.length ? () => switchMobileTab('agents') : openAgentWizard;
+
+      customAgents.forEach(a => {
+        const isActive = a.status === 'active';
+        const card = document.createElement('div');
+        card.className = `bg-white rounded-2xl p-4 border border-slate-200 shadow-sm border-l-4 ${isActive ? 'border-l-blue-600' : 'border-l-slate-300'}`;
+        card.innerHTML = `
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl ${isActive ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'} flex items-center justify-center text-sm"><i class="fa-solid ${a.icon}"></i></div>
+              <div><h4 class="font-bold text-xs text-slate-900 leading-tight">${escapeHtml(a.name)}</h4><p class="text-[10px] text-slate-400">${a.autonomy === 'auto' ? 'Fully automatic' : 'Drafts for approval'}</p></div>
+            </div>
+            <span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1 ${isActive ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-100 text-slate-500 border border-slate-200'}"><span class="w-1.5 h-1.5 rounded-full ${isActive ? 'bg-emerald-500' : 'bg-slate-400'}"></span>${isActive ? 'Active' : 'Paused'}</span>
+          </div>
+          <p class="text-[11px] text-slate-600 leading-snug my-2 line-clamp-2">${escapeHtml(a.goal)}</p>
+          <div class="flex flex-wrap gap-1.5 pb-2 border-b border-slate-100">
+            <span class="text-[9px] font-bold uppercase tracking-wide bg-slate-50 border border-slate-200 text-slate-600 px-2 py-0.5 rounded"><i class="fa-solid fa-bolt text-blue-600 mr-1"></i>${a.trigger}</span>
+            ${a.channels.map(c => `<span class="text-[9px] font-bold uppercase tracking-wide bg-blue-50 border border-blue-100 text-blue-700 px-2 py-0.5 rounded">${c}</span>`).join('')}
+          </div>
+          <div class="flex justify-between items-center pt-2 text-[10px]">
+            <span class="text-slate-400">Runs: <strong class="text-slate-700">${a.runs}</strong> • Created today</span>
+            <div class="flex items-center gap-3">
+              <button onclick="deleteAgent(${a.id})" class="text-slate-400 font-bold">Delete</button>
+              <button onclick="toggleAgentStatus(${a.id})" class="text-blue-600 font-extrabold">${isActive ? 'Pause' : 'Resume'}</button>
+            </div>
+          </div>`;
+        list.appendChild(card);
+      });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       renderClients(mockClients);
+      renderAgents();
+      ['agent-name', 'agent-goal'].forEach(id => document.getElementById(id).addEventListener('input', validateAgentStep2));
       const ctx = document.getElementById('mobileRevenueChart');
       if (ctx) {
         new Chart(ctx, {
