@@ -1,0 +1,36 @@
+{
+  "client": "Northwind Coffee",
+  "period_label": "Q4 2026",
+  "start": "2026-10-01",
+  "end": "2026-12-31",
+  "timezone": "America/Los_Angeles",
+  "reactive_share": 0.15,
+  "default_owner": "Social lead",
+  "channels": [
+    {
+      "name": "Instagram",
+      "code": "IG",
+      "posts_per_week": 4,
+      "days": ["Mon", "Wed", "Thu", "Sat"],
+      "time": "11:00",
+      "formats": {"Reel": 0.5, "Carousel": 0.3, "Static": 0.2}
+    },
+    {
+      "name": "TikTok",
+      "code": "TT",
+      "posts_per_week": 3,
+      "time": "18:00",
+      "formats": {"Video": 1.0}
+    }
+  ],
+  "pillars": [
+    {"name": "Origin and craft", "share": 0.4},
+    {"name": "People and place", "share": 0.3},
+    {"name": "Offers and drops", "share": 0.3}
+  ],
+  "tentpoles": [
+    {"date": "2026-11-03", "name": "Ethiopia harvest drop", "channels": ["Instagram", "TikTok"], "format": "Reel", "pillar": "Offers and drops", "hook": "This bag left Sidama 21 days ago."},
+    {"date": "2026-11-27", "name": "Black Friday subscription offer", "channels": ["Instagram"], "format": "Reel", "pillar": "Offers and drops", "hook": "One price change this year, and it is in your favour."},
+    {"date": "2026-12-08", "name": "Gift guide", "channels": ["Instagram"], "format": "Carousel", "pillar": "Offers and drops", "hook": "Three gifts for people who say they do not need anything."}
+  ]
+}
