@@ -23,5 +23,8 @@
         "repo": "addyosmani/agent-skills"
       }
     }
+  },
+  "env": {
+    "PONYTAIL_DEFAULT_MODE": "lite"
   }
 }
