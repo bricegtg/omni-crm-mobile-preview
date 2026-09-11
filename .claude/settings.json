@@ -26,5 +26,18 @@
   },
   "env": {
     "PONYTAIL_DEFAULT_MODE": "lite"
+  },
+  "hooks": {
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/.claude/hooks/subagent-toolkits.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
   }
 }
